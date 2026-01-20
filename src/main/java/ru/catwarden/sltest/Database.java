@@ -135,4 +135,26 @@ public class Database {
         }
         return list;
     }
+
+    public Birthday getBirthdayById(int id){
+        String query = "SELECT * FROM birthday WHERE id = ?";
+        Birthday birthday = null;
+
+        try(Connection conn = connectToDatabase();
+            PreparedStatement statement = conn.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet rs = statement.executeQuery()){
+                if(rs.next()){
+                    birthday = new Birthday();
+                    birthday.setId(rs.getInt("id"));
+                    birthday.setName(rs.getString("name"));
+                    birthday.setDate(rs.getDate("birthday"));
+                }
+            }
+
+        } catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return birthday;
+    }
 }

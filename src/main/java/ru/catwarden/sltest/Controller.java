@@ -178,5 +178,7 @@ public class Controller {
         }
         return  parsed_list;
     }
-
+    public Birthday getBirthdayById(int id){
+        return db.getBirthdayById(id);
+    }
 }

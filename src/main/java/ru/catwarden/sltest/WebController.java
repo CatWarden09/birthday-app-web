@@ -1,20 +1,20 @@
 package ru.catwarden.sltest;
 
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
 
 @Controller
 @RequestMapping
-public class BirthdayWebController {
+public class WebController {
 
     private ru.catwarden.sltest.Controller controller;
 
-    public BirthdayWebController(ru.catwarden.sltest.Controller controller){
+    public WebController(ru.catwarden.sltest.Controller controller){
         this.controller = controller;
     }
 
@@ -56,6 +56,13 @@ public class BirthdayWebController {
         model.addAttribute("skipped_birthdays",
             controller.getSkippedBirthdays() != null ? controller.getSkippedBirthdays() : Collections.emptyList());
         return "skipped_birthdays";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable int id, Model model){
+        Birthday birthday = controller.getBirthdayById(id);
+        model.addAttribute("birthday", birthday);
+        return "edit_birthday";
     }
 
 }
