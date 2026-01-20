@@ -1,12 +1,14 @@
 package ru.catwarden.sltest;
 import org.springframework.stereotype.Component;
-
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 @Component
-public class Config {
+public class Config implements WebMvcConfigurer {
     private Properties properties;
 
     public Config(){
@@ -29,5 +31,13 @@ public class Config {
 
     public String getDatabasePassword(){
         return properties.getProperty("db.password");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String absolutePath = Paths.get("images").toAbsolutePath().toUri().toString();
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations(absolutePath);
+
     }
 }

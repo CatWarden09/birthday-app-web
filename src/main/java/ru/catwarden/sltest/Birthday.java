@@ -7,6 +7,7 @@ public class Birthday {
     private int id;
     private String name;
     private Date date;
+    private String photopath;
 
 
     public void setName(String name) {
@@ -21,6 +22,10 @@ public class Birthday {
         this.id = id;
     }
 
+    public void setPhotoPath(String photo) {
+        this.photopath = photo;
+    }
+
     public int getId() {
         return id;
     }
@@ -31,5 +36,9 @@ public class Birthday {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getPhotoPath() {
+        return photopath;
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Repository
 public class Database {
@@ -28,7 +27,8 @@ public class Database {
         String query = "CREATE TABLE IF NOT EXISTS birthday ("+
                 "id SERIAL PRIMARY KEY, " +
                 "name VARCHAR(50) NOT NULL, " +
-                "birthday DATE NOT NULL " +
+                "birthday DATE NOT NULL, " +
+                "photopath VARCHAR(255) DEFAULT ' ' " +
                 ");";
 
         try(Connection conn = connectToDatabase();
@@ -45,7 +45,7 @@ public class Database {
     }
 
     public List<Birthday> getAllBirthdays() {
-        String query = "SELECT id, name, birthday FROM birthday";
+        String query = "SELECT id, name, photopath, birthday FROM birthday";
         List<Birthday> list = new ArrayList<>();
 
         try(Connection conn = connectToDatabase();
@@ -57,6 +57,7 @@ public class Database {
                 birthday.setId(rs.getInt("id"));
                 birthday.setName(rs.getString("name"));
                 birthday.setDate(rs.getDate("birthday"));
+                birthday.setPhotoPath(rs.getString("photopath"));
                 list.add(birthday);
             }
 
@@ -97,14 +98,15 @@ public class Database {
 
     }
 
-    public void editBirthday(int id, Date date, String name){
-        String query = "UPDATE birthday SET name = ?, birthday = ? WHERE id = ?";
+    public void editBirthday(int id, Date date, String name, String photoPath){
+        String query = "UPDATE birthday SET name = ?, birthday = ?, photopath = ? WHERE id = ?";
 
         try(Connection conn = connectToDatabase();
         PreparedStatement statement = conn.prepareStatement(query)){
             statement.setString(1, name);
             statement.setDate(2, date);
-            statement.setInt(3, id);
+            statement.setString(3,photoPath);
+            statement.setInt(4, id);
             statement.executeUpdate();
         } catch (SQLException exception){
             exception.printStackTrace();

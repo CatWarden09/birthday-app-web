@@ -1,6 +1,5 @@
 package ru.catwarden.sltest;
 
-
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -28,6 +27,7 @@ public class Controller {
             birthday.setIndex(i+1);
             birthday.setName(list.get(i).getName());
             birthday.setDate(list.get(i).getDate());
+            birthday.setPhotopath(list.get(i).getPhotoPath());
 
             list_parsed.add(birthday);
         }
@@ -55,7 +55,7 @@ public class Controller {
     }
 
     public void editBirthday(Birthday birthday){
-        db.editBirthday(birthday.getId(), birthday.getDate(), birthday.getName());
+        db.editBirthday(birthday.getId(), birthday.getDate(), birthday.getName(), birthday.getPhotoPath());
     }
 
     public List<BirthdayWithIndex> getTodayBirthdays(){

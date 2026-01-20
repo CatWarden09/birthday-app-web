@@ -10,6 +10,7 @@ public class BirthdayWithIndex {
     private int age;
     private String name;
     private String date;
+    private String photopath;
 
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -25,12 +26,17 @@ public class BirthdayWithIndex {
     public void setAge(int age){
         this.age = age;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setDate(Date date) {
         this.date = FORMAT.format(date);
+    }
+
+    public void setPhotopath(String photopath) {
+        this.photopath = photopath;
     }
 
     public int getId() {
@@ -51,6 +57,10 @@ public class BirthdayWithIndex {
 
     public int getAge(){
         return age;
+    }
+
+    public String getPhotopath() {
+        return photopath;
     }
 }
 

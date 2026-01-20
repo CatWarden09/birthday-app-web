@@ -3,7 +3,11 @@ package ru.catwarden.sltest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 @Controller
@@ -75,7 +79,14 @@ public class WebController {
     }
 
     @PostMapping("/edit")
-    public String editBirthday(@ModelAttribute Birthday birthday){
+    public String editBirthday(@ModelAttribute Birthday birthday, @RequestParam MultipartFile photo) throws IOException {
+        String filename = birthday.getId() + "_" + photo.getOriginalFilename();
+        Path uploadPath = Paths.get("images", filename);
+
+        Files.write(uploadPath, photo.getBytes());
+
+        birthday.setPhotoPath("/images/" + filename);
+
         controller.editBirthday(birthday);
         return "redirect:/all";
     }
@@ -86,3 +97,4 @@ public class WebController {
         return "redirect:/all";
     }
 }
+
