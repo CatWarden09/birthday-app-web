@@ -54,9 +54,8 @@ public class Controller {
         db.deleteBirthday(id);
     }
 
-    public void editBirthday(int id, Date date, String name){
-        db.editBirthday(id, date, name);
-
+    public void editBirthday(Birthday birthday){
+        db.editBirthday(birthday.getId(), birthday.getDate(), birthday.getName());
     }
 
     public List<BirthdayWithIndex> getTodayBirthdays(){
