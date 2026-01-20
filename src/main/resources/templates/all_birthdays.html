@@ -10,6 +10,9 @@
         <span th:text="${b.name}"></span>
         <span th:text="'родился ' + ${b.date}"></span>
         <a th:href="@{edit/{id}(id=${b.id})}">Редактировать</a>
+        <form th:action="@{/delete/{id}(id=${b.id})}" method="post" style="display:inline">
+            <button type="submit">Удалить</button>
+        </form>
         <br/>
 </div>
 <a href="/main">Главная</a>

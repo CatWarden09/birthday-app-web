@@ -69,4 +69,9 @@ public class WebController {
         return "redirect:/all";
     }
 
+    @PostMapping("/delete/{id}")
+    public String deleteBirthday(@PathVariable int id){
+        controller.deleteBirthday(id);
+        return "redirect:/all";
+    }
 }
