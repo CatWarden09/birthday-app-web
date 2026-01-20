@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список ДР</title>
+</head>
+<body>
+<h1>Все дни рождения</h1>
+    <div th:each="b : ${all_birthdays}">
+        <span th:text="${b.index}"></span>.
+        <span th:text="${b.name}"></span>
+        <span th:text="'родился ' + ${b.date}"></span>
+        <br/>
+</div>
+</body>
+</html>

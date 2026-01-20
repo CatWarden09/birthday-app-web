@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Главная</title>
+</head>
+<body>
+<h1>Сегодняшние дни рождения</h1>
+    <div th:each="b : ${today_birthdays}">
+        <span th:text="${b.index}"></span>.
+        <span th:text="${b.name}"></span>
+        <span th:text="'сегодня празднует своё ' + ${b.age} + '-летие!'"></span>
+    </div>
+<h1>Ближайшие дни рождения</h1>
+    <div th:each="b : ${upcoming_birthdays}">
+        <span th:text="${b.index}"></span>.
+        <span th:text="${b.name}"></span>
+        <span th:text="${b.date}"></span>
+        <span th:text="'будет праздновать свое ' + ${b.age} + '-летие!'"></span>
+    </div>
+</body>
+</html>
