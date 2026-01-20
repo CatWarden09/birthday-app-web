@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Collections;
 
 @Controller
-@RequestMapping("/birthdays")
+@RequestMapping
 public class BirthdayWebController {
 
     private ru.catwarden.sltest.Controller controller;
@@ -17,14 +17,6 @@ public class BirthdayWebController {
         this.controller = controller;
     }
 
-
-    @GetMapping("/all")
-    public String showAllBirthdays(Model model){
-        model.addAttribute("all_birthdays",
-                controller.getAllBirthdayList() != null ? controller.getAllBirthdayList() : Collections.emptyList());
-
-        return "all_birthdays";
-    }
 
     @GetMapping("/main")
     public String showMainPage(Model model){
@@ -36,5 +28,12 @@ public class BirthdayWebController {
         return "main";
     }
 
+    @GetMapping("/all")
+    public String showAllBirthdays(Model model){
+        model.addAttribute("all_birthdays",
+                controller.getAllBirthdayList() != null ? controller.getAllBirthdayList() : Collections.emptyList());
+
+        return "all_birthdays";
+    }
 
 }
