@@ -63,6 +63,17 @@ public class WebController {
         return "edit_birthday";
     }
 
+    @GetMapping("/add")
+    public String showAddingForm(){
+        return "add_birthday";
+    }
+
+    @PostMapping("/add")
+    public String addBirthday(@RequestParam String name, @RequestParam java.sql.Date date){
+        controller.setNewBirthday(name, date);
+        return "redirect:/all";
+    }
+
     @PostMapping("/edit")
     public String editBirthday(@ModelAttribute Birthday birthday){
         controller.editBirthday(birthday);
