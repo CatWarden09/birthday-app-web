@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Прошедшие ДР</title>
+</head>
+<body>
+<h1>Прошедшие дни рождения</h1>
+<div th:each="b : ${skipped_birthdays}">
+    <span th:text="${b.index}"></span>.
+    <span th:text="${b.name}"></span>
+    <span th:text="${b.date}"></span>
+    <span th:text="'праздновал своё ' + ${b.age} + '-летие!'"></span>
+</div>
+<a href="/main">Главная</a>
+<a href="/all">Общий список ДР</a>
+<a href="/today">Список сегодняшних ДР</a>
+<a href="/upcoming">Список ближайших ДР</a>
+</body>
+</html>

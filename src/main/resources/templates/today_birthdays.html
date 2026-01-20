@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ДР сегодня</title>
+</head>
+<body>
+<h1>Сегодняшние дни рождения</h1>
+<div th:each="b : ${today_birthdays}">
+    <span th:text="${b.index}"></span>.
+    <span th:text="${b.name}"></span>
+    <span th:text="'сегодня празднует своё ' + ${b.age} + '-летие!'"></span>
+</div>
+<a href="/main">Главная</a>
+<a href="/all">Общий список ДР</a>
+<a href="/upcoming">Список ближайших ДР</a>
+<a href="/skipped">Список прошедших ДР</a>
+</body>
+</html>
