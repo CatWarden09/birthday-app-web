@@ -9,6 +9,7 @@
         <span th:text="${b.index}"></span>.
         <span th:text="${b.name}"></span>
         <span th:text="'родился ' + ${b.date}"></span>
+        <a th:href="@{edit/{id}(id=${b.id})}">Редактировать</a>
         <br/>
 </div>
 <a href="/main">Главная</a>

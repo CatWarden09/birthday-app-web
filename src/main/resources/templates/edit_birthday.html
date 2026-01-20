@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать ДР</title>
+</head>
+<body>
+<h1>Редактировать день рождения</h1>
+
+<form th:action="@{/edit}" th:object="${birthday}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Имя:</label>
+    <input type="text" th:field="*{name}" /><br/>
+
+    <label>Дата рождения:</label>
+    <input type="date" th:field="*{date}" /><br/>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<a th:href="@{/all}">Вернуться к общему списку ДР</a>
+</body>
+</html>
