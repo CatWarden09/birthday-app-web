@@ -18,6 +18,11 @@ public class WebController {
         this.service = service;
     }
 
+    @GetMapping("/")
+    public String showRootPage(){
+        return "redirect:/main";
+    }
+
 
     @GetMapping("/main")
     public String showMainPage(Model model){
