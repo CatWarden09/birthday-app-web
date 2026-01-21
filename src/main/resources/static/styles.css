@@ -1,20 +1,20 @@
 .btn-edit {
     display: inline-block;
     padding: 6px 12px;
-    background-color: #2b9dc5;
+    background-color: #5c5b5b;
     color: white;
     text-decoration: none;
     border-radius: 4px;
     font-family: Arial, sans-serif;
 }
 .btn-edit:hover {
-    background-color: #2991b6;
+    background-color: #504f4f;
 }
 
 .btn-menu{
     display: inline-block;
     padding: 6px 12px;
-    background-color: #2b9dc5;
+    background-color: #5c5b5b;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -22,13 +22,14 @@
 }
 
 .btn-menu:hover{
-    background-color: #2991b6;
+    background-color: #504f4f;
 }
 
 .btn-delete {
     display: inline-block;
     padding: 6px 12px;
     background-color: #c71732;
+    font-size: 20px;
     color: white;
     border-radius: 4px;
 }
@@ -36,26 +37,38 @@
     background-color: #ac142c;
 }
 
+
+table, th, td {
+    border: 1px solid #9a9999;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     font-family: Arial, sans-serif;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+
 }
 
 table th {
-    background-color: #2b9dc5;
+    background-color: #4a4a4a;
     color: white;
     padding: 10px;
     text-align: left;
+
 }
 
 table td {
-    background-color: #a6c4c6;
+    background-color: #dad7d7;
     color: black;
+    font-size: 20px;
+    font-weight: 600;
     padding: 8px 12px;
-    border-bottom: 1px solid #ddd;
+}
+
+body {
+    background-color: #c6bebe;
 }
 
 h1 {
@@ -73,4 +86,8 @@ p {
     color: #333333;
     line-height: 1.5;
     margin-bottom: 10px;
+}
+
+div{
+    text-align: center;
 }
