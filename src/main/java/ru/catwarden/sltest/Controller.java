@@ -75,7 +75,6 @@ public class Controller {
             birthday.setIndex(i+1);
             birthday.setName(list.get(i).getName());
             birthday.setPhotopath(list.get(i).getPhotoPath());
-            System.out.println("Birthday photopath is " + birthday.getPhotopath());
 
             int year_parsed = list.get(i).getDate().toLocalDate().getYear();
             birthday.setAge(current_year-year_parsed);

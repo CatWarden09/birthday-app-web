@@ -152,6 +152,7 @@ public class Database {
                     birthday.setId(rs.getInt("id"));
                     birthday.setName(rs.getString("name"));
                     birthday.setDate(rs.getDate("birthday"));
+                    birthday.setPhotoPath(rs.getString("photopath"));
                 }
             }
 
