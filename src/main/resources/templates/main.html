@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title>Главная</title>
 </head>
 <body>
@@ -46,16 +47,16 @@
         <tr th:each="b : ${upcoming_birthdays}">
             <td><span th:text="${b.index} + '.'"></span></td>
             <td><span th:text="${b.name}"></span></td>
-            <td><span th:text="${b.date}"></span></td>
+            <td><span th:text="${#temporals.format(b.date, 'dd.MM.yyyy')}"></span></td>
             <td><span th:text="${b.age}"></span></td>
             <td><img th:src="@{${b.photopath}}" width="300"> </td>
         </tr>
     </tbody>
 </table>
-<a href="/all">Общий список ДР</a>
-<a href="/today">Список сегодняшних ДР</a>
-<a href="/upcoming">Список ближайших ДР</a>
-<a href="/skipped">Список прошедших ДР</a>
-<a href="/add">Добавить ДР</a>
+<a href="/all" class="btn-menu">Общий список ДР </a>
+<a href="/today" class="btn-menu">Список сегодняшних ДР</a>
+<a href="/upcoming" class="btn-menu">Список ближайших ДР</a>
+<a href="/skipped" class="btn-menu">Список прошедших ДР</a>
+<a href="/add" class="btn-menu">Добавить ДР</a>
 </body>
 </html>

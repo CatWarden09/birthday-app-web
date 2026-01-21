@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title>ДР сегодня</title>
 </head>
 <body>
@@ -27,10 +28,10 @@
         </tr>
     </tbody>
 </table>
-<a href="/main">Главная</a>
-<a href="/all">Общий список ДР</a>
-<a href="/upcoming">Список ближайших ДР</a>
-<a href="/skipped">Список прошедших ДР</a>
-<a href="/add">Добавить ДР</a>
+<a href="/main" class="btn-menu">Главная</a>
+<a href="/all" class="btn-menu">Общий список ДР</a>
+<a href="/upcoming" class="btn-menu">Список ближайших ДР</a>
+<a href="/skipped" class="btn-menu">Список прошедших ДР</a>
+<a href="/add" class="btn-menu">Добавить ДР</a>
 </body>
 </html>

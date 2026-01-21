@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title>Добавить ДР</title>
 </head>
 <body>
@@ -23,6 +24,6 @@
     <button type="submit">Добавить</button>
 </form>
 
-<a th:href="@{/all}">Вернуться к общему списку ДР</a>
+<a th:href="@{/all}" class="btn-menu">Вернуться к общему списку ДР</a>
 </body>
 </html>
