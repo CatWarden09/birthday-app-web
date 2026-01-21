@@ -42,15 +42,6 @@ public class Controller {
         return birthdayId;
     }
 
-    public int getBirthdayId(int index, List<BirthdayWithIndex> list){
-        int id = -1;
-        for(BirthdayWithIndex birthday:list){
-            if(birthday.getIndex() == index){
-                id = birthday.getId();
-            }
-        }
-        return id;
-    }
 
     public void deleteBirthday(int id){
         db.deleteBirthday(id);

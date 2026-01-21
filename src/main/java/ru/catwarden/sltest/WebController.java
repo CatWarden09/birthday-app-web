@@ -74,7 +74,7 @@ public class WebController {
 
     @PostMapping("/add")
     public String addBirthday(@RequestParam String name, @RequestParam java.sql.Date date, @RequestParam MultipartFile photo) throws IOException{
-        // TODO add the first image upload method
+        // DONE add the first image upload method
         // 1. Create a Birthday object with name and date from arguments^
         // 2. Save this object to the DB
         // 3. Pass the object id to the ImageHandler
@@ -104,7 +104,10 @@ public class WebController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteBirthday(@PathVariable int id){
+    public String deleteBirthday(@PathVariable int id) throws IOException{
+        Birthday birthday = controller.getBirthdayById(id);
+        ImageHandler.deletePhoto(birthday.getPhotoPath());
+
         controller.deleteBirthday(id);
         return "redirect:/all";
     }

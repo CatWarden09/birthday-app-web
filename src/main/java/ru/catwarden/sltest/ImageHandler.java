@@ -14,6 +14,9 @@ public class ImageHandler {
 
         }
 
+        // delete the previous photo
+        deletePhoto(birthday.getPhotoPath());
+
         String filename = birthday.getId() + "_" + photo.getOriginalFilename();
 
         Path uploadPath = Paths.get("images", filename);
@@ -31,6 +34,17 @@ public class ImageHandler {
 
         return "/images/" + filename;
 
+    }
+
+    public static void deletePhoto(String DBFilepath) throws IOException{
+        // need to get only the filename and not the full path since the full path is searched in the disk root and not the actual working directory
+        String filename = Paths.get(DBFilepath).getFileName().toString();
+
+        // in this case the images folder is searched inside the working directory of JVM
+        // otherwise if the full path from the DB is passed there, method will search this path in the disk root
+        Path filepath = Paths.get("images", filename);
+
+        Files.delete(filepath);
     }
 }
 
