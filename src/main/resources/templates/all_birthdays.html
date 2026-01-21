@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title>Список ДР</title>
 </head>
 <body>
 <h1>Все дни рождения</h1>
-    <div th:each="b : ${all_birthdays}">
-        <span th:text="${b.index}"></span>.
-        <span th:text="${b.name}"></span>
-        <span th:text="'родился ' + ${b.date}"></span>
-        <img th:src = "@{${b.photopath}}" width="100"/>
-        <a th:href="@{edit/{id}(id=${b.id})}">Редактировать</a>
-        <form th:action="@{/delete/{id}(id=${b.id})}" method="post" style="display:inline">
-            <button type="submit">Удалить</button>
-        </form>
-        <br/>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Имя</th>
+        <th>Дата рождения</th>
+        <th>Фото</th>
+        <th colspan="2">Действия</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="b : ${all_birthdays}">
+            <td><span th:text="${b.index} + '.'"></span></td>
+            <td><span th:text="${b.name}"></span></td>
+            <td><span th:text="${b.date}"></span></td>
+            <td><img th:src = "@{${b.photopath}}" width="300"/></td>
+            <td><a th:href="@{edit/{id}(id=${b.id})}" class="btn-edit">Редактировать</a></td>
+            <td><form th:action="@{/delete/{id}(id=${b.id})}" method="post" style="display:inline">
+                <button type="submit" class="btn-delete">Удалить</button>
+            </form></td>
+
+        </tr>
+    </tbody>
+</table>
 <a href="/main">Главная</a>
 <a href="/today">Список сегодняшних ДР</a>
 <a href="/upcoming">Список ближайших ДР</a>

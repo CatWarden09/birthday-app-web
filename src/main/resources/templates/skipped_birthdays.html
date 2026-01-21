@@ -5,12 +5,27 @@
 </head>
 <body>
 <h1>Прошедшие дни рождения</h1>
-<div th:each="b : ${skipped_birthdays}">
-    <span th:text="${b.index}"></span>.
-    <span th:text="${b.name}"></span>
-    <span th:text="${b.date}"></span>
-    <span th:text="'праздновал своё ' + ${b.age} + '-летие!'"></span>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Имя</th>
+        <th>Дата ДР</th>
+        <th>Возраст</th>
+        <th>Фото</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="b : ${skipped_birthdays}">
+            <td><span th:text="${b.index} + '.'"></span></td>
+            <td><span th:text="${b.name}"></span></td>
+            <td><span th:text="${b.date}"></span></td>
+            <td><span th:text="${b.age}"></span></td>
+            <td><img th:src="@{${b.photopath}}" width="300"></td>
+        </tr>
+    </tbody>
+</table>
 <a href="/main">Главная</a>
 <a href="/all">Общий список ДР</a>
 <a href="/today">Список сегодняшних ДР</a>

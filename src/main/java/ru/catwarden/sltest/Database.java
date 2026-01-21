@@ -116,7 +116,7 @@ public class Database {
     public List<Birthday> getTodayBirthdays(int month, int day){
         List<Birthday> list = new ArrayList<>();
 
-        String query = "SELECT name, birthday FROM birthday WHERE EXTRACT(MONTH FROM birthday) = ? AND EXTRACT(DAY FROM birthday) = ?";
+        String query = "SELECT name, birthday, photopath FROM birthday WHERE EXTRACT(MONTH FROM birthday) = ? AND EXTRACT(DAY FROM birthday) = ?";
 
         try(Connection conn = connectToDatabase();
         PreparedStatement statement = conn.prepareStatement(query);){
@@ -127,6 +127,7 @@ public class Database {
                     Birthday birthday = new Birthday();
                     birthday.setName(rs.getString("name"));
                     birthday.setDate(rs.getDate("birthday"));
+                    birthday.setPhotoPath(rs.getString("photopath"));
 
                     list.add(birthday);
                 }
