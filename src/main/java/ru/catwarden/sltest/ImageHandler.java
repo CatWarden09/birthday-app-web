@@ -17,9 +17,12 @@ public class ImageHandler {
         // delete the previous photo
         deletePhoto(birthday.getPhotoPath());
 
+
+
         String filename = birthday.getId() + "_" + photo.getOriginalFilename();
 
         Path uploadPath = Paths.get("images", filename);
+        Files.createDirectories(uploadPath.getParent());
         Files.write(uploadPath, photo.getBytes());
 
         return "/images/" + filename;
@@ -30,6 +33,7 @@ public class ImageHandler {
         String filename = id + "_" + photo.getOriginalFilename();
 
         Path uploadPath = Paths.get("images", filename);
+        Files.createDirectories(uploadPath.getParent());
         Files.write(uploadPath, photo.getBytes());
 
         return "/images/" + filename;
