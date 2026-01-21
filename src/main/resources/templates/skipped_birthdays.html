@@ -5,7 +5,10 @@
 </head>
 <body>
 <h1>Прошедшие дни рождения</h1>
-<table>
+<div th:if="${skipped_birthdays.isEmpty()}">
+    <p>За прошедшую неделю дней рождения не было</p>
+</div>
+<table th:unless="${skipped_birthdays.isEmpty()}">
     <thead>
     <tr>
         <th>№</th>
@@ -17,7 +20,7 @@
     </thead>
 
     <tbody>
-        <tr th:each="b : ${skipped_birthdays}">
+        <tr th:each="b:${skipped_birthdays}">
             <td><span th:text="${b.index} + '.'"></span></td>
             <td><span th:text="${b.name}"></span></td>
             <td><span th:text="${b.date}"></span></td>

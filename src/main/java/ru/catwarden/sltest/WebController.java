@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Collections;
 
 @Controller
@@ -73,7 +74,10 @@ public class WebController {
     }
 
     @PostMapping("/add")
-    public String addBirthday(@RequestParam String name, @RequestParam java.sql.Date date, @RequestParam MultipartFile photo) throws IOException{
+    public String addBirthday(@RequestParam String name,
+                              @RequestParam java.sql.Date date,
+                              @RequestParam MultipartFile photo,
+                              Model model) throws IOException{
         // DONE add the first image upload method
         // 1. Create a Birthday object with name and date from arguments^
         // 2. Save this object to the DB
@@ -81,6 +85,21 @@ public class WebController {
         // 4. Set the Birthday photopath from the ImageHandler by the Birthday id and update the photopath for this Birthday in the DB
         // 5. ???
         // 6. PROFIT!!! (update photopath can be reused for editing birthday method if we upload a new photo)
+
+        boolean is_error = false;
+
+        LocalDate current_date = LocalDate.now();
+        LocalDate oldest_date = current_date.minusYears(120);
+
+        if(date.toLocalDate().isAfter(current_date) || date.toLocalDate().isBefore(oldest_date)){
+            model.addAttribute("dateError", "Указана некорректная дата!");
+            is_error = true;
+        }
+
+        if(is_error){
+            return "add_birthday";
+        }
+
         Birthday birthday = new Birthday();
         birthday.setName(name);
         birthday.setDate(date);

@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1>Все дни рождения</h1>
-<table>
+<div th:if="${all_birthdays.isEmpty()}">
+    <p>Дни рождения еще не добавлены</p>
+</div>
+<table th:unless="${all_birthdays.isEmpty()}">
     <thead>
     <tr>
         <th>№</th>

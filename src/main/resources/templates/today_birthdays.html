@@ -5,7 +5,10 @@
 </head>
 <body>
 <h1>Сегодняшние дни рождения</h1>
-<table>
+<div th:if="${today_birthdays.isEmpty()}">
+    <p>Сегодня дней рождения нет</p>
+</div>
+<table th:unless="${today_birthdays.isEmpty()}">
     <thead>
     <tr>
         <th>№</th>

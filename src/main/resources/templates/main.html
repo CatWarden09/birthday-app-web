@@ -5,7 +5,10 @@
 </head>
 <body>
 <h1>Сегодняшние дни рождения</h1>
-<table>
+<div th:if="${today_birthdays.isEmpty()}">
+    <p>Сегодня дней рождения нет</p>
+</div>
+<table th:unless="${today_birthdays.isEmpty()}">
     <thead>
     <tr>
         <th>№</th>
@@ -25,7 +28,10 @@
     </tbody>
 </table>
 <h1>Ближайшие дни рождения</h1>
-<table>
+<div th:if="${upcoming_birthdays.isEmpty()}">
+    <p>В ближайшее время дней рождения нет</p>
+</div>
+<table th:unless="${upcoming_birthdays.isEmpty()}">
     <thead>
     <tr>
         <th>№</th>
