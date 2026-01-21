@@ -7,6 +7,7 @@
 <body>
 <h1>Добавить день рождения</h1>
 
+<div>
 <form th:action="@{/add}" method="post" enctype="multipart/form-data">
     <label>Имя*</label>
     <input type="text" name="name" required /><br/>
@@ -23,6 +24,7 @@
 
     <button type="submit">Добавить</button>
 </form>
+</div>
 <div>
 <a th:href="@{/all}" class="btn-menu">Вернуться к общему списку ДР</a>
 </div>

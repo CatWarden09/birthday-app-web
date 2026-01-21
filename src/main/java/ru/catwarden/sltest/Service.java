@@ -1,19 +1,16 @@
 package ru.catwarden.sltest;
 
-import org.springframework.stereotype.Service;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Service
-public class Controller {
+@org.springframework.stereotype.Service
+public class Service {
     private Database db;
 
-    public Controller(Database db){
+    public Service(Database db){
         this.db = db;
     }
 

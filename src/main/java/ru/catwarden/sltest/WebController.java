@@ -5,9 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collections;
 
@@ -15,19 +12,19 @@ import java.util.Collections;
 @RequestMapping
 public class WebController {
 
-    private ru.catwarden.sltest.Controller controller;
+    private Service service;
 
-    public WebController(ru.catwarden.sltest.Controller controller){
-        this.controller = controller;
+    public WebController(Service service){
+        this.service = service;
     }
 
 
     @GetMapping("/main")
     public String showMainPage(Model model){
         model.addAttribute("today_birthdays",
-                controller.getTodayBirthdays() != null ? controller.getTodayBirthdays() : Collections.emptyList());
+                service.getTodayBirthdays() != null ? service.getTodayBirthdays() : Collections.emptyList());
         model.addAttribute("upcoming_birthdays",
-                controller.getUpcomingBirthdays() != null ? controller.getUpcomingBirthdays() : Collections.emptyList());
+                service.getUpcomingBirthdays() != null ? service.getUpcomingBirthdays() : Collections.emptyList());
 
         return "main";
     }
@@ -35,7 +32,7 @@ public class WebController {
     @GetMapping("/all")
     public String showAllBirthdays(Model model){
         model.addAttribute("all_birthdays",
-                controller.getAllBirthdayList() != null ? controller.getAllBirthdayList() : Collections.emptyList());
+                service.getAllBirthdayList() != null ? service.getAllBirthdayList() : Collections.emptyList());
 
         return "all_birthdays";
     }
@@ -43,27 +40,27 @@ public class WebController {
     @GetMapping("/upcoming")
     public String showUpcomingBirthdays(Model model){
         model.addAttribute("upcoming_birthdays",
-                controller.getUpcomingBirthdays() != null ? controller.getUpcomingBirthdays() : Collections.emptyList());
+                service.getUpcomingBirthdays() != null ? service.getUpcomingBirthdays() : Collections.emptyList());
         return "upcoming_birthdays";
     }
 
     @GetMapping("/today")
     public String showTodayBirthdays(Model model){
         model.addAttribute("today_birthdays",
-                controller.getTodayBirthdays() != null ? controller.getTodayBirthdays() : Collections.emptyList());
+                service.getTodayBirthdays() != null ? service.getTodayBirthdays() : Collections.emptyList());
         return "today_birthdays";
     }
 
     @GetMapping("/skipped")
     public String showSkippedBirthdays(Model model){
         model.addAttribute("skipped_birthdays",
-            controller.getSkippedBirthdays() != null ? controller.getSkippedBirthdays() : Collections.emptyList());
+            service.getSkippedBirthdays() != null ? service.getSkippedBirthdays() : Collections.emptyList());
         return "skipped_birthdays";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model){
-        Birthday birthday = controller.getBirthdayById(id);
+        Birthday birthday = service.getBirthdayById(id);
         model.addAttribute("birthday", birthday);
         return "edit_birthday";
     }
@@ -103,11 +100,11 @@ public class WebController {
         Birthday birthday = new Birthday();
         birthday.setName(name);
         birthday.setDate(date);
-        int birthdayId = controller.setNewBirthday(birthday);
+        int birthdayId = service.setNewBirthday(birthday);
 
         String photopath = ImageHandler.uploadPhoto(birthdayId, photo);
 
-        controller.updateBirthdayPhotopath(birthdayId, photopath);
+        service.updateBirthdayPhotopath(birthdayId, photopath);
 
         return "redirect:/all";
     }
@@ -117,17 +114,17 @@ public class WebController {
         String photopath = ImageHandler.editPhoto(birthday, photo);
 
         birthday.setPhotoPath(photopath);
-        controller.editBirthday(birthday);
+        service.editBirthday(birthday);
 
         return "redirect:/all";
     }
 
     @PostMapping("/delete/{id}")
     public String deleteBirthday(@PathVariable int id) throws IOException{
-        Birthday birthday = controller.getBirthdayById(id);
+        Birthday birthday = service.getBirthdayById(id);
         ImageHandler.deletePhoto(birthday.getPhotoPath());
 
-        controller.deleteBirthday(id);
+        service.deleteBirthday(id);
         return "redirect:/all";
     }
 }
