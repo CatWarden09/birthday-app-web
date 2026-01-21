@@ -16,7 +16,9 @@
 
     <label>Дата рождения:</label>
     <input type="date" th:field="*{date}" /><br/>
-
+    <div th:if="${dateError != null}">
+        <span th:text="${dateError}" th:style="'color:red'"></span><br/>
+    </div>
     <label>Фотография:</label>
     <input type="file" name="photo" accept="image/*"/><br/>
 

@@ -115,10 +115,23 @@ public class WebController {
     }
 
     @PostMapping("/edit")
-    public String editBirthday(@ModelAttribute Birthday birthday, @RequestParam MultipartFile photo) throws IOException {
-        String photopath = ImageHandler.editPhoto(birthday, photo);
+    public String editBirthday(@ModelAttribute Birthday birthday,
+                               @RequestParam MultipartFile photo,
+                               Model model) throws IOException {
 
-        birthday.setPhotoPath(photopath);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate oldestDate = currentDate.minusYears(120);
+
+        if (birthday.getDate().toLocalDate().isAfter(currentDate) ||
+                birthday.getDate().toLocalDate().isBefore(oldestDate)) {
+
+            model.addAttribute("dateError", "Указана некорректная дата!");
+            model.addAttribute("birthday", birthday);
+            return "edit_birthday";
+        }
+
+        String photoPath = ImageHandler.editPhoto(birthday, photo);
+        birthday.setPhotoPath(photoPath);
         service.editBirthday(birthday);
 
         return "redirect:/all";
