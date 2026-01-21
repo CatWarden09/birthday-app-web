@@ -89,7 +89,21 @@ java -jar *birthday-app-web-1.0.jar*
 4. Открыть сервис в браузере по адресу localhost:8080 (порт по умолчанию, настраивается в application.properties)
 
 ## Демо
-TBD
+
+# Навигация по разделам
+![Навигация](demo/birthday_browsing.gif)
+
+# Добавление ДР
+![Добавление](demo/birthday_add.gif)
+
+# Изменение ДР
+![Изменение-др](demo/birthday_edit.gif)
+
+# Изменение фотографии именинника
+![Изменение-фото](demo/birthday_photo.gif)
+
+# Удаление ДР
+![Удаление](demo/birthday_delete.gif)
 
 ## Консольная версия
 Консольная версия этого проекта доступна в репозитории по **[ссылке](https://github.com/CatWarden09/birthday-app-console)**.
