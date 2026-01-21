@@ -1,18 +1,15 @@
 package ru.catwarden.sltest;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
-// class for console data output
 public class BirthdayWithIndex {
     private int id;
     private int index;
     private int age;
     private String name;
-    private String date;
+    private Date date;
     private String photopath;
 
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 
     public void setId(int id) {
@@ -32,7 +29,7 @@ public class BirthdayWithIndex {
     }
 
     public void setDate(Date date) {
-        this.date = FORMAT.format(date);
+        this.date = date;
     }
 
     public void setPhotopath(String photopath) {
@@ -47,8 +44,8 @@ public class BirthdayWithIndex {
         return name;
     }
 
-    public String getDate() {
-        return date;
+    public java.time.LocalDate getDate() {
+        return date.toLocalDate();
     }
 
     public int getIndex() {

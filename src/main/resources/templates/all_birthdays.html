@@ -21,7 +21,7 @@
         <tr th:each="b : ${all_birthdays}">
             <td><span th:text="${b.index} + '.'"></span></td>
             <td><span th:text="${b.name}"></span></td>
-            <td><span th:text="${b.date}"></span></td>
+            <td><span th:text="${#temporals.format(b.date, 'dd.MM.yyyy')}"></span></td>
             <td><img th:src = "@{${b.photopath}}" width="300"/></td>
             <td><a th:href="@{edit/{id}(id=${b.id})}" class="btn-edit">Редактировать</a></td>
             <td><form th:action="@{/delete/{id}(id=${b.id})}" method="post" style="display:inline">

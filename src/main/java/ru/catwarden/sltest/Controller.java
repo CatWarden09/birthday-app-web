@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,13 +25,18 @@ public class Controller {
         for(int i =0; i<list.size();i++){
             BirthdayWithIndex birthday = new BirthdayWithIndex();
             birthday.setId(list.get(i).getId());
-            birthday.setIndex(i+1);
             birthday.setName(list.get(i).getName());
             birthday.setDate(list.get(i).getDate());
             birthday.setPhotopath(list.get(i).getPhotoPath());
 
 
             list_parsed.add(birthday);
+        }
+        list_parsed.sort(Comparator.comparing(BirthdayWithIndex::getDate));
+
+        // need to set the index after the main loop to display the indexes in web in the correct order
+        for(int i = 0; i< list_parsed.size(); i++){
+            list_parsed.get(i).setIndex(i + 1);
         }
         return list_parsed;
     }
