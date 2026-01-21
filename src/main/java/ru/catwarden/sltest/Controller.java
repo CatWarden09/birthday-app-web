@@ -35,10 +35,11 @@ public class Controller {
         return list_parsed;
     }
 
-    public void setNewBirthday(String name, Date date){
+    public int setNewBirthday(Birthday birthday){
 
-        db.setNewBirthday(name, date);
+        int birthdayId = db.setNewBirthday(birthday.getName(), birthday.getDate());
 
+        return birthdayId;
     }
 
     public int getBirthdayId(int index, List<BirthdayWithIndex> list){
@@ -180,6 +181,11 @@ public class Controller {
         }
         return  parsed_list;
     }
+
+    public void updateBirthdayPhotopath(int id, String photopath){
+        db.updateBirthdayPhotopath(id, photopath);
+    }
+
     public Birthday getBirthdayById(int id){
         return db.getBirthdayById(id);
     }

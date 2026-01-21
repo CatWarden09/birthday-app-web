@@ -73,16 +73,23 @@ public class WebController {
     }
 
     @PostMapping("/add")
-    public String addBirthday(@RequestParam String name, @RequestParam java.sql.Date date){
+    public String addBirthday(@RequestParam String name, @RequestParam java.sql.Date date, @RequestParam MultipartFile photo) throws IOException{
         // TODO add the first image upload method
         // 1. Create a Birthday object with name and date from arguments^
         // 2. Save this object to the DB
-        // 3. Pass the object to the ImageHandler
-        // 4. Get the photopath from the ImageHandler by the Birthday id and update the photopath for this Birthday in the DB
+        // 3. Pass the object id to the ImageHandler
+        // 4. Set the Birthday photopath from the ImageHandler by the Birthday id and update the photopath for this Birthday in the DB
         // 5. ???
         // 6. PROFIT!!! (update photopath can be reused for editing birthday method if we upload a new photo)
+        Birthday birthday = new Birthday();
+        birthday.setName(name);
+        birthday.setDate(date);
+        int birthdayId = controller.setNewBirthday(birthday);
 
-        controller.setNewBirthday(name, date);
+        String photopath = ImageHandler.uploadPhoto(birthdayId, photo);
+
+        controller.updateBirthdayPhotopath(birthdayId, photopath);
+
         return "redirect:/all";
     }
 

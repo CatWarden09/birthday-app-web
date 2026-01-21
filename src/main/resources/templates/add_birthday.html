@@ -6,12 +6,15 @@
 <body>
 <h1>Добавить день рождения</h1>
 
-<form th:action="@{/add}" method="post">
+<form th:action="@{/add}" method="post" enctype="multipart/form-data">
     <label>Имя:</label>
     <input type="text" name="name" /><br/>
 
     <label>Дата рождения:</label>
     <input type="date" name="date" /><br/>
+
+    <label>Фотография:</label>
+    <input type="file" name="photo" accept="image/*"/><br/>
 
     <button type="submit">Добавить</button>
 </form>

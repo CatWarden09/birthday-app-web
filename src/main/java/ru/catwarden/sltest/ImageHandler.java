@@ -22,5 +22,15 @@ public class ImageHandler {
         return "/images/" + filename;
 
     }
+
+    public static String uploadPhoto(int id, MultipartFile photo) throws IOException{
+        String filename = id + "_" + photo.getOriginalFilename();
+
+        Path uploadPath = Paths.get("images", filename);
+        Files.write(uploadPath, photo.getBytes());
+
+        return "/images/" + filename;
+
+    }
 }
 

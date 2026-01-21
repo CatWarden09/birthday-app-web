@@ -68,21 +68,29 @@ public class Database {
         return list;
     }
 
-    public void setNewBirthday(String name, Date date){
+    // return the birthday id so the ImageHandler can assign the photopath to it right away
+    public int setNewBirthday(String name, Date date){
         String query = "INSERT into birthday (name,birthday) VALUES(?,?)";
 
 
         try(Connection conn = connectToDatabase();
-        PreparedStatement statement = conn.prepareStatement(query)
+        PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
         ) { statement.setString(1, name);
             statement.setDate(2, date);
             statement.executeUpdate();
+
+            try(ResultSet rs = statement.getGeneratedKeys()){
+                if(rs.next()){
+                    // need to pass '1' as the argument because here we don't work with the table results but with the generated id
+                    return rs.getInt(1);
+                }
+            }
 
         } catch (SQLException exception){
             exception.printStackTrace();
         }
 
-
+        return -1; // to avoid compiler error of missing return statement
     }
 
     public void deleteBirthday(int id){
@@ -119,7 +127,7 @@ public class Database {
         String query = "SELECT name, birthday, photopath FROM birthday WHERE EXTRACT(MONTH FROM birthday) = ? AND EXTRACT(DAY FROM birthday) = ?";
 
         try(Connection conn = connectToDatabase();
-        PreparedStatement statement = conn.prepareStatement(query);){
+        PreparedStatement statement = conn.prepareStatement(query)){
             statement.setInt(1, month);
             statement.setInt(2, day);
             try(ResultSet rs = statement.executeQuery()) {
@@ -160,5 +168,21 @@ public class Database {
             exception.printStackTrace();
         }
         return birthday;
+    }
+
+    public void updateBirthdayPhotopath(int id, String photopath){
+        String query = "UPDATE birthday SET photopath = ? WHERE id = ?";
+
+        try(Connection conn = connectToDatabase();
+            PreparedStatement statement = conn.prepareStatement(query)){
+
+            statement.setString(1, photopath);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+
+
+        } catch (SQLException exception){
+            exception.printStackTrace();
+        }
     }
 }
